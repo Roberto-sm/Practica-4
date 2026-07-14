@@ -1,0 +1,195 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <span class="logo">
+        <ion-icon name="wallet" color="primary"></ion-icon>
+        Gasto Fácil
+      </span>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="total-card">
+
+    <div class="user-greeting">
+      <span>¡Hola de nuevo, {{ nombreUsuario() }}! 👋</span>
+    </div>
+
+    <div class="month-selector">
+      <ion-button fill="clear" size="small" (click)="mesAnterior()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </ion-button>
+
+      <span>{{ nombreMesSeleccionado() }}</span>
+
+      <ion-button fill="clear" size="small" (click)="mesSiguiente()">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="totals-row">
+
+      <div class="total-block">
+        <p class="total-label">Total del mes</p>
+
+        <h1 class="total-amount">
+          {{ gastosService.formatearMonto(totalMesSeleccionado()) }}
+        </h1>
+      </div>
+
+      <div class="total-block total-general-block">
+        <p class="total-label">Total general</p>
+
+        <h1 class="total-amount">
+          {{ gastosService.formatearMonto(gastosService.totalGeneral()) }}
+        </h1>
+      </div>
+
+    </div>
+
+    <div class="total-change positive">
+      <ion-icon name="trending-up"></ion-icon>
+      <span>12% más que el mes anterior</span>
+    </div>
+
+    <div class="quick-stats">
+
+      <div class="stat-item">
+        <ion-icon name="wallet-outline"></ion-icon>
+
+        <span class="stat-value">
+          {{ gastosMesSeleccionado().length }}
+        </span>
+
+        <span class="stat-label">Nro. Gastos</span>
+      </div>
+
+      <div class="stat-item">
+        <ion-icon name="receipt-outline"></ion-icon>
+
+        <span class="stat-value">
+          {{ ticketsMesSeleccionado() }}
+        </span>
+
+        <span class="stat-label">Tickets</span>
+      </div>
+
+      <div class="stat-item">
+        <ion-icon name="restaurant-outline"></ion-icon>
+
+        <span class="stat-value">
+          {{ getTopCategoria() }}
+        </span>
+
+        <span class="stat-label">Top Categoría</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  @if (consejoIA()) {
+    <div class="ai-alert-container">
+      <div class="ai-alert-inner">
+        <div class="ai-sparkle-icon">
+          <ion-icon name="flash" color="warning"></ion-icon>
+        </div>
+        <div class="ai-alert-text">
+          <h2>Asistente de Salud Financiera</h2>
+          <p>{{ consejoIA() }}</p>
+          
+          <ion-button fill="clear" size="small" class="ai-action-btn" (click)="togglePlanAlivio()">
+            {{ mostrarPlanAlivio() ? 'Ocultar sugerencia ✕' : '¿Cómo lo soluciono? ✨' }}
+          </ion-button>
+        </div>
+      </div>
+
+      @if (mostrarPlanAlivio()) {
+        <div class="ai-plan-expanded">
+          <div class="divider"></div>
+          <h3>🎯 Plan de Acción Recomendado:</h3>
+          <p>
+            Para equilibrar tus finanzas este mes, tu IA te reta a recortar tus próximos consumos de ocio en un total de 
+            <strong>{{ gastosService.formatearMonto(montoARecortar()) }}</strong>. 
+            Prueba cocinando en casa los próximos días o sustituyendo salidas por planes locales.
+          </p>
+        </div>
+      }
+    </div>
+  }
+
+  <div class="scan-container" (click)="irAEscanear()">
+    <div class="scan-inner">
+      <ion-icon name="camera-outline" color="primary"></ion-icon>
+
+      <div class="scan-text">
+        <h2>Escanear ticket</h2>
+        <p>Añade gastos automáticamente con IA</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <h2>Gastos recientes</h2>
+
+    <ion-button fill="clear" size="small" (click)="irAGastos()">
+      Ver más
+      <ion-icon slot="end" name="chevron-forward"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-list class="expenses-list" lines="none">
+
+    @for (gasto of gastosService.gastosRecientes(); track gasto.id) {
+
+      <ion-item class="expense-item">
+
+        <div
+          class="category-icon"
+          [style.background-color]="getCategoriaColor(gasto.categoria) + '20'"
+          slot="start">
+
+          <ion-icon
+            [name]="getCategoriaIcon(gasto.categoria)"
+            [style.color]="getCategoriaColor(gasto.categoria)">
+          </ion-icon>
+
+        </div>
+
+        <ion-label>
+          <h3>{{ gasto.concepto }}</h3>
+
+          <p>
+            {{ gastosService.formatearFecha(gasto.fecha) }}
+          </p>
+        </ion-label>
+
+        <ion-note slot="end" class="expense-amount negative">
+          -{{ gastosService.formatearMonto(gasto.monto) }}
+        </ion-note>
+
+      </ion-item>
+
+    }
+
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="irANuevoGasto()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

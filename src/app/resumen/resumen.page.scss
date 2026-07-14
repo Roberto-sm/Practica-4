@@ -1,0 +1,249 @@
+ion-header {
+  ion-toolbar {
+    --background: #ffffff;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #1F2937;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+.page-header {
+  padding: 16px 16px 8px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1F2937;
+    margin: 0 0 4px 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 0;
+  }
+}
+
+.total-card {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  border-radius: 20px;
+  padding: 24px;
+  margin: 16px;
+  color: #ffffff;
+
+  .total-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+    margin: 0 0 8px 0;
+  }
+
+  .total-amount {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+
+  .total-change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+
+    &.positive {
+      color: #D1FAE5;
+    }
+
+    ion-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+.chart-section {
+  padding: 0 16px;
+  margin-bottom: 24px;
+
+  .donut-chart {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+
+    .donut {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+
+      .donut-segment {
+        fill: none;
+        stroke-width: 12;
+        stroke-linecap: round;
+      }
+    }
+
+    .chart-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+
+      ion-icon {
+        font-size: 24px;
+        color: #6B7280;
+      }
+
+      .chart-label {
+        font-size: 14px;
+        color: #6B7280;
+      }
+
+      .chart-percent {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1F2937;
+      }
+    }
+  }
+
+  .highlight-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #FEF3C7;
+    padding: 16px;
+    border-radius: 12px;
+
+    ion-icon {
+      font-size: 32px;
+    }
+
+    .highlight-info {
+      display: flex;
+      flex-direction: column;
+
+      .highlight-label {
+        font-size: 12px;
+        color: #92400E;
+      }
+
+      .highlight-value {
+        font-size: 16px;
+        font-weight: 600;
+        color: #78350F;
+      }
+    }
+  }
+}
+
+.breakdown-section {
+  padding: 0 16px;
+  margin-bottom: 24px;
+
+  h2 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6B7280;
+    letter-spacing: 0.5px;
+    margin: 0 0 16px 0;
+  }
+
+  .category-list {
+    background: transparent;
+
+    .category-item {
+      --background: #ffffff;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --inner-padding-end: 0;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+      .category-indicator {
+        width: 8px;
+        height: 40px;
+        border-radius: 4px;
+        margin-right: 12px;
+      }
+
+      ion-label {
+        h3 {
+          font-size: 15px;
+          font-weight: 500;
+          color: #1F2937;
+          margin: 0 0 4px 0;
+        }
+
+        p {
+          font-size: 13px;
+          color: #9CA3AF;
+          margin: 0;
+        }
+      }
+
+      ion-note {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1F2937;
+      }
+    }
+  }
+}
+
+.tip-card {
+  display: flex;
+  gap: 12px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  padding: 16px;
+  margin: 0 16px 100px;
+  border-radius: 12px;
+
+  .tip-icon {
+    width: 40px;
+    height: 40px;
+    background: #0066FF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    ion-icon {
+      font-size: 20px;
+      color: #ffffff;
+    }
+  }
+
+  .tip-content {
+    h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1E40AF;
+      margin: 0 0 4px 0;
+    }
+
+    p {
+      font-size: 13px;
+      color: #3B82F6;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}

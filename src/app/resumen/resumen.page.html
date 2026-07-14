@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <span class="logo">
+        <ion-icon name="wallet" color="primary"></ion-icon>
+        Gasto Fácil
+      </span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-header">
+    <h1>Resumen</h1>
+    <p>Análisis de tus finanzas este mes</p>
+  </div>
+
+  <!-- Total Card -->
+  <div class="total-card">
+    <p class="total-label">TOTAL ACUMULADO</p>
+    <h1 class="total-amount">{{ gastosService.formatearMonto(gastosService.totalMes()) }}</h1>
+    <div class="total-change positive">
+      <ion-icon name="trending-up"></ion-icon>
+      <span>8% más que el mes pasado</span>
+    </div>
+  </div>
+
+  <!-- Donut Chart -->
+  <div class="chart-section">
+    <div class="donut-chart">
+      <svg viewBox="0 0 100 100" class="donut">
+        @for (segmento of segmentosChart(); track segmento.categoria.id; let i = $index) {
+          <circle
+            class="donut-segment"
+            cx="50" cy="50" r="40"
+            [style.stroke]="segmento.categoria.color"
+            [style.stroke-dasharray]="calcularDashArray(segmento.porcentaje)"
+            [style.stroke-dashoffset]="calcularDashOffset(i)"
+          ></circle>
+        }
+      </svg>
+      <div class="chart-center">
+        <ion-icon name="pie-chart-outline"></ion-icon>
+        <span class="chart-label">Gastos</span>
+        <span class="chart-percent">100%</span>
+      </div>
+    </div>
+
+    @if (categoriaDestacada()) {
+      <div class="highlight-card">
+        <ion-icon name="restaurant" [style.color]="categoriaDestacada()!.categoria.color"></ion-icon>
+        <div class="highlight-info">
+          <span class="highlight-label">Categoría con más gastos</span>
+          <span class="highlight-value">{{ categoriaDestacada()!.categoria.nombre }} ({{ categoriaDestacada()!.porcentaje | number:'1.0-0' }}%)</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Category Breakdown -->
+  <div class="breakdown-section">
+    <h2>DESGLOSE POR CATEGORÍA</h2>
+
+    <ion-list class="category-list">
+      @for (item of gastosService.totalPorCategoria(); track item.categoria.id) {
+        <ion-item lines="none" class="category-item">
+          <div class="category-indicator" [style.background-color]="item.categoria.color" slot="start"></div>
+          <ion-label>
+            <h3>{{ item.categoria.nombre }}</h3>
+            <p>{{ item.porcentaje | number:'1.0-0' }}% del total</p>
+          </ion-label>
+          <ion-note slot="end">
+            {{ gastosService.formatearMonto(item.total) }}
+          </ion-note>
+        </ion-item>
+      }
+    </ion-list>
+  </div>
+
+  <!-- Tip Card -->
+  <div class="tip-card">
+    <div class="tip-icon">
+      <ion-icon name="bulb-outline"></ion-icon>
+    </div>
+    <div class="tip-content">
+      <h4>Vas por buen camino!</h4>
+      <p>Has ahorrado un 12% comparado con la semana anterior. Mantén el ritmo en tu categoría de Comida.</p>
+    </div>
+  </div>
+</ion-content>

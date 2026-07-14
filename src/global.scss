@@ -1,0 +1,151 @@
+/*
+ * Gasto Fácil - Global Styles (Corregido para evitar amontonamientos)
+ */
+
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+// Fondo general premium para toda la app
+ion-content {
+  --background: #F5F7FA !important;
+  --padding-start: 0px !important; /* SE QUITÓ EL PADDING QUE RECORTABA LAS TARJETAS */
+  --padding-end: 0px !important;
+  --padding-top: 0px !important;
+  --padding-bottom: 0px !important;
+}
+
+.card-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   REGLAS DE AJUSTE GLOBAL PARA EVITAR RESPONSIVE ROTO
+   ========================================================================== */
+
+/* Asegura que todos los contenedores principales usen el ancho correcto sin desbordar */
+.total-card, 
+.scan-container, 
+.section-header, 
+.expenses-list {
+  margin-left: 16px !important;
+  margin-right: 16px !important;
+  width: calc(100% - 32px) !important;
+}
+
+/* Darle separación y estilo premium a las tarjetas de gastos individuales */
+.expense-item {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+  margin-bottom: 10px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Espaciado para los contenedores de filtros deslizables */
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 16px 12px 16px !important; /* Mantiene sus márgenes alineados */
+  margin-top: 10px;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  
+  &::-webkit-scrollbar {
+    display: none; /* Oculta la barra de scroll horizontal */
+  }
+}
+
+/* Ajustar títulos grandes para que fluyan bien en pantallas móviles */
+.page-title h1 {
+  font-size: 28px !important;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 15px;
+  padding: 0 16px;
+}
+
+/* Formato limpio para los montos de dinero */
+.expense-amount {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+}
+
+/* ==========================================================================
+   TIRO DE GRACIA PARA REPARAR LA BARRA INFERIOR (TABS CHUECA)
+   ========================================================================== */
+ion-tab-bar {
+  --background: #ffffff !important;
+  --border-color: #e2e8f0 !important;
+  height: 65px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+/* Distribución exacta del 25% para cada botón normal */
+ion-tab-button:not(.scan-tab-btn) {
+  flex: 1 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  ion-icon {
+    font-size: 22px !important;
+    margin-bottom: 2px !important;
+  }
+  ion-label {
+    font-size: 11px !important;
+    margin: 0 !important;
+  }
+}
+
+/* Centrado perfecto para el botón de Escanear en medio de las pestañas */
+.scan-tab-btn {
+  flex: 1 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+
+  ion-icon {
+    background: linear-gradient(135deg, #1a66ff 0%, #0044cc 100%) !important;
+    color: #ffffff !important;
+    font-size: 18px !important;
+    width: 38px !important;
+    height: 38px !important;
+    padding: 10px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 10px rgba(26, 102, 255, 0.25) !important;
+    margin-bottom: 3px !important;
+  }
+
+  ion-label {
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    margin: 0 !important;
+  }
+}

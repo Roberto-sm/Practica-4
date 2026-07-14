@@ -1,0 +1,155 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      {{ modoEdicion ? 'Editar gasto' : 'Nuevo gasto' }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="guardarGasto()">
+
+    <div class="form-group">
+      <ion-label>Concepto</ion-label>
+
+      <ion-input
+        [(ngModel)]="gasto.concepto"
+        name="concepto"
+        placeholder="¿En qué gastaste hoy?"
+        fill="outline"
+        required>
+      </ion-input>
+    </div>
+
+    <div class="form-group">
+      <ion-label>Monto</ion-label>
+
+      <ion-input
+        [(ngModel)]="gasto.monto"
+        name="monto"
+        type="number"
+        placeholder="$ 0.00"
+        fill="outline"
+        required>
+      </ion-input>
+    </div>
+
+    <div class="form-row">
+
+      <div class="form-group half">
+        <ion-label>Fecha</ion-label>
+
+        <ion-input
+          [(ngModel)]="fechaStr"
+          name="fecha"
+          type="date"
+          fill="outline"
+          required>
+        </ion-input>
+      </div>
+
+      <div class="form-group half">
+        <ion-label>Categoría</ion-label>
+
+        <ion-select
+          [(ngModel)]="gasto.categoria"
+          name="categoria"
+          placeholder="Seleccionar"
+          interface="action-sheet"
+          fill="outline">
+
+          @for (cat of categorias; track cat.id) {
+            <ion-select-option [value]="cat.id">
+              {{ cat.nombre }}
+            </ion-select-option>
+          }
+
+        </ion-select>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <ion-label>Método de pago</ion-label>
+
+      <div class="payment-methods">
+
+        <ion-chip
+          [color]="gasto.metodoPago === 'efectivo' ? 'primary' : 'light'"
+          (click)="setMetodoPago('efectivo')">
+          Efectivo
+        </ion-chip>
+
+        <ion-chip
+          [color]="gasto.metodoPago === 'tarjeta' ? 'primary' : 'light'"
+          (click)="setMetodoPago('tarjeta')">
+          Tarjeta
+        </ion-chip>
+
+        <ion-chip
+          [color]="gasto.metodoPago === 'transferencia' ? 'primary' : 'light'"
+          (click)="setMetodoPago('transferencia')">
+          Transfer
+        </ion-chip>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ion-label>Notas</ion-label>
+
+      <ion-textarea
+        [(ngModel)]="gasto.notas"
+        name="notas"
+        placeholder="Agrega más detalles aquí..."
+        fill="outline"
+        rows="3">
+      </ion-textarea>
+    </div>
+
+    <div class="form-actions">
+
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="!isFormValid()">
+
+        {{ modoEdicion ? 'Actualizar' : 'Guardar' }}
+
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        type="button"
+        (click)="cancelar()">
+
+        Cancelar
+
+      </ion-button>
+
+    </div>
+
+  </form>
+
+  @if (!modoEdicion) {
+
+    <div class="alternative-action">
+      <p>
+        Puedes ingresar el gasto manualmente o escanear un ticket para que la IA lo detecte.
+      </p>
+
+      <ion-button fill="clear" (click)="irAEscanear()">
+        <ion-icon slot="start" name="scan-outline"></ion-icon>
+        Escanear ticket
+      </ion-button>
+    </div>
+
+  }
+
+</ion-content>

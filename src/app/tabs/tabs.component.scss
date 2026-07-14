@@ -1,0 +1,104 @@
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN INFERIOR (TABS) - ALINEACIÓN Y POSICIÓN FIJA DEFINITIVA
+   ========================================================================== */
+
+ion-tab-bar {
+  --background: #ffffff !important;
+  --border-color: #e2e8f0 !important;
+  height: 68px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+  align-items: center !important; 
+  border-top: 1px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.02) !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+/* Estilo base para los botones normales (Inicio, Gastos, Resumen) */
+ion-tab-button:not(.scan-tab) {
+  flex: 1 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  --color: #9ca3af !important;
+  --color-selected: #0066FF !important;
+
+  ion-icon {
+    font-size: 22px !important;
+    margin-bottom: 2px !important;
+    transform: none !important; /* BLOQUEA EL BRINCO NATIVO DE IONIC */
+  }
+
+  ion-label {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   BOTÓN CENTRAL DE ESCANEAR (CLAVADO Y CENTRADO)
+   ========================================================================== */
+.scan-tab {
+  flex: 1 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+
+  /* El círculo azul premium que envuelve al icono */
+  .scan-button {
+    width: 44px !important; 
+    height: 44px !important;
+    background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3) !important;
+    
+    /* POSICIÓN CLAVADA EXACTA */
+    margin-top: -8px !important; 
+    margin-bottom: 4px !important;
+    transition: transform 0.1s ease;
+
+    ion-icon {
+      color: #ffffff !important;
+      font-size: 22px !important;
+      margin: 0 !important;
+      transform: none !important; /* BLOQUEA EL BRINCO DEL ICONO INTERNO */
+    }
+  }
+
+  &:active .scan-button {
+    transform: scale(0.92); /* Solo se encoge al picarlo con el dedo */
+  }
+
+  ion-label {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #9ca3af !important; 
+    margin: 0 !important;
+  }
+}
+
+/* Estilo cuando estás parado activamente en la pestaña de Escanear */
+.scan-tab.tab-selected {
+  ion-label {
+    color: #0066FF !important; 
+    font-weight: 600 !important;
+  }
+  
+  .scan-button {
+    box-shadow: 0 4px 14px rgba(0, 102, 255, 0.45) !important;
+  }
+}

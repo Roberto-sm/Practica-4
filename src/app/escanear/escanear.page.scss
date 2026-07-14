@@ -1,0 +1,198 @@
+ion-content {
+  --background: #eef0f4;
+}
+
+ion-toolbar {
+  --background: white;
+  --min-height: 60px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+
+  ion-icon {
+    color: #0066ff;
+    font-size: 28px;
+  }
+}
+
+.scanner-header {
+  text-align: center;
+  margin-top: 12px;
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+}
+
+.camera-container {
+  padding: 0 16px;
+}
+
+.camera-preview {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 24px;
+  background: #0d1117;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.camera-placeholder {
+  ion-icon {
+    color: #6b7280;
+    font-size: 90px;
+  }
+}
+
+.scan-frame {
+  position: absolute;
+  inset: 0;
+}
+
+.corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 4px solid #0066ff;
+}
+
+.top-left {
+  top: 80px;
+  left: 30px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  top: 80px;
+  right: 30px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  bottom: 80px;
+  left: 30px;
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  bottom: 80px;
+  right: 30px;
+  border-left: none;
+  border-top: none;
+}
+
+.capture-info {
+  padding: 16px;
+}
+
+.captured-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f4f4f5;
+  padding: 16px;
+  border-radius: 16px;
+
+  ion-icon {
+    color: #0066ff;
+    font-size: 32px;
+  }
+}
+
+.file-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.file-meta {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.action-buttons {
+  padding: 0 16px 24px;
+}
+
+.analyze-btn {
+  --background: #0066ff;
+  --border-radius: 16px;
+  height: 54px;
+  font-weight: 700;
+}
+
+.ai-description {
+  margin-top: 16px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.retake-btn {
+  margin-top: 10px;
+  --color: #0066ff;
+  font-weight: 600;
+}
+
+.capture-btn {
+  --background: #0066ff;
+  --border-radius: 16px;
+  height: 54px;
+}
+
+.gallery-btn {
+  margin-top: 12px;
+  --border-radius: 16px;
+  height: 54px;
+}
+
+.webcam-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.webcam-capture-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 50;
+
+  --background: #0066ff;
+  --border-radius: 14px;
+  height: 52px;
+  font-weight: 700;
+}

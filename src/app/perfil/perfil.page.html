@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="perfil-container">
+    
+    <div class="avatar-section">
+      <div class="avatar-placeholder">
+        <span>{{ nombre ? nombre.charAt(0).toUpperCase() : 'U' }}</span>
+      </div>
+      <p class="user-email">{{ email }}</p>
+    </div>
+
+    <ion-list lines="none">
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Nombre Completo</ion-label>
+        <ion-input 
+          type="text" 
+          [(ngModel)]="nombre" 
+          placeholder="Escribe tu nombre">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button 
+      expand="block" 
+      color="success" 
+      class="ion-margin-top" 
+      (click)="actualizarNombre()" 
+      [disabled]="loading">
+      {{ loading ? 'Guardando...' : 'Guardar Cambios' }}
+    </ion-button>
+
+    <ion-button 
+      expand="block" 
+      color="danger" 
+      fill="clear" 
+      class="ion-margin-top" 
+      (click)="cerrarSesion()">
+      Cerrar Sesión
+    </ion-button>
+
+  </div>
+</ion-content>

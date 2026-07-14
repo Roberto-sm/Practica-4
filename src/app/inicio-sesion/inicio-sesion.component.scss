@@ -1,0 +1,200 @@
+// Contenedor principal centrado
+.auth-container {
+  max-width: 500px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+// Área del Logo y Títulos
+.brand-area {
+  margin-bottom: 2.5rem;
+
+  .logo-wrapper {
+    width: 64px;
+    height: 64px;
+    background-color: #10b981; // El color verde esmeralda de tu logo original
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem auto;
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0;
+  }
+}
+
+// Formulario e Inputs estilizados (Material Design Float)
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    width: 100%;
+    padding: 1rem 0.75rem 0.5rem 0.75rem;
+    background-color: #cbd5e1; // Color grisáceo del input original
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #334155;
+    outline: none;
+
+    // Efecto Floating Label al hacer focus o escribir
+    &:focus ~ label,
+    &:not(:placeholder-shown) ~ label {
+      transform: translateY(-20px) scale(0.85);
+      color: #10b981;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    color: #10b981; // Verde del texto original
+    font-size: 0.9rem;
+    pointer-events: none;
+    transition: 0.2s ease all;
+  }
+
+  .input-line {
+    height: 2px;
+    background-color: transparent;
+    transition: 0.2s ease all;
+  }
+}
+
+// Opciones (Recordar y Olvidé)
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+
+  .custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0f172a;
+    cursor: pointer;
+  }
+
+  .forgot-password {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Botón de Ingresar Oscuro
+.btn-primary {
+  width: 100%;
+  background-color: #0f172a; // Azul oscuro casi negro de tu botón original
+  color: #ffffff;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #1e293b;
+  }
+
+  &:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+  }
+}
+
+// Divisor Intermedio
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: #94a3b8;
+  font-size: 0.85rem;
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  span {
+    padding: 0 0.75rem;
+  }
+}
+
+// Botones de Redes Sociales alineados
+.social-area {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  .btn-social {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+
+    img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain; // 💡 Evita que las imágenes se distorsionen o crezcan de más
+    }
+
+    &:hover {
+      background-color: #f8fafc;
+    }
+  }
+}
+
+// Footer
+.auth-footer {
+  font-size: 0.9rem;
+  color: #64748b;
+
+  a {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}

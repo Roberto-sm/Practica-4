@@ -1,0 +1,125 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/escanear" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <span class="logo">
+        <ion-icon name="wallet" color="primary"></ion-icon>
+        Gasto Fácil
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="page-header">
+    <h1>Confirmar gasto</h1>
+    <p>Revisa los datos detectados antes de guardar</p>
+  </div>
+
+  <div class="ai-badge">
+    <ion-icon name="sparkles"></ion-icon>
+    Datos obtenidos por IA
+  </div>
+
+  @if (imagenTicket) {
+    <div class="ticket-preview">
+      <img [src]="imagenTicket" alt="Ticket escaneado" />
+      <ion-button fill="clear" size="small" class="view-original">
+        <ion-icon slot="start" name="expand-outline"></ion-icon>
+        Ver ticket original
+      </ion-button>
+    </div>
+  }
+
+  <div class="detected-data">
+    <div class="data-field">
+      <ion-label>Monto detectado</ion-label>
+      <div class="amount-display">
+        <span class="currency">$</span>
+        <ion-input
+          type="number"
+          class="value"
+          [(ngModel)]="monto"
+          placeholder="0.00">
+        </ion-input>
+      </div>
+    </div>
+
+    <div class="data-field">
+      <ion-label>Concepto</ion-label>
+      <ion-input
+        [(ngModel)]="concepto"
+        placeholder="Nombre del establecimiento"
+        fill="outline">
+      </ion-input>
+    </div>
+
+    <div class="form-row">
+      <div class="data-field half">
+        <ion-label>Fecha</ion-label>
+        <div class="date-display">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ fechaStr }}</span>
+        </div>
+      </div>
+
+      <div class="data-field half">
+        <ion-label>Categoría sugerida</ion-label>
+        <div class="category-display" [style.background-color]="getCategoriaColor() + '15'">
+          <ion-icon [name]="getCategoriaIcon()" [style.color]="getCategoriaColor()"></ion-icon>
+          <span>{{ getCategoriaNombre() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="data-field">
+      <ion-label>Categoría</ion-label>
+      <ion-select
+        [(ngModel)]="categoria"
+        placeholder="Selecciona categoría"
+        interface="action-sheet"
+        fill="outline">
+        @for (cat of categorias; track cat.id) {
+          <ion-select-option [value]="cat.id">{{ cat.nombre }}</ion-select-option>
+        }
+      </ion-select>
+    </div>
+
+    <div class="data-field">
+      <ion-label>Método de pago</ion-label>
+      <ion-select
+        [(ngModel)]="metodoPago"
+        interface="action-sheet"
+        fill="outline">
+        <ion-select-option value="efectivo">Efectivo</ion-select-option>
+        <ion-select-option value="tarjeta">Tarjeta</ion-select-option>
+        <ion-select-option value="transferencia">Transferencia</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="data-field">
+      <ion-label>Notas</ion-label>
+      <ion-textarea
+        [(ngModel)]="notas"
+        placeholder="Notas adicionales..."
+        fill="outline"
+        rows="2">
+      </ion-textarea>
+      <span class="field-note">
+        <ion-icon name="scan-outline"></ion-icon>
+        Escaneado desde ticket
+      </span>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <ion-button expand="block" (click)="guardarGasto()">
+      Guardar gasto
+    </ion-button>
+    <ion-button expand="block" fill="outline" (click)="corregirManualmente()">
+      Corregir manualmente
+    </ion-button>
+  </div>
+</ion-content>

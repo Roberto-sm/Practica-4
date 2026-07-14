@@ -1,0 +1,60 @@
+<div class="ion-padding">
+  <div class="auth-container">
+    
+    <div class="brand-area">
+      <div class="logo-wrapper">
+        <span class="logo-emoji">✨</span>
+      </div>
+      <h2>Gasto Fácil</h2>
+      <p>Tu dinero, bajo control de forma inteligente.</p>
+    </div>
+
+    <form class="auth-form" (ngSubmit)="iniciarSesion()" autocomplete="off">
+      
+      <div class="form-group">
+        <input type="email" id="email" [(ngModel)]="email" name="email" placeholder=" " required>
+        <label for="email">Correo electrónico</label>
+        <div class="input-line"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder=" " required>
+        <label for="password">Contraseña</label>
+        <div class="input-line"></div>
+      </div>
+
+      <div class="form-options">
+        <label class="custom-checkbox">
+          <input type="checkbox" name="rememberMe">
+          <span class="checkmark"></span>
+          Recordarme
+        </label>
+        <a href="#" class="forgot-password">¿La olvidaste?</a>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Cargando...' : 'Ingresar' }}
+      </button>
+    </form>
+
+    <div class="auth-divider">
+      <span>o entra con</span>
+    </div>
+
+    <div class="social-area">
+      <button type="button" class="btn-social">
+        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google">
+        Google
+      </button>
+      <button type="button" class="btn-social">
+        <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple">
+        Apple
+      </button>
+    </div>
+
+    <p class="auth-footer">
+      ¿No tienes una cuenta? <a href="#">Créala gratis</a>
+    </p>
+
+  </div>
+</div>

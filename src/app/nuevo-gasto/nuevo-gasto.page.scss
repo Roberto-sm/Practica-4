@@ -1,0 +1,102 @@
+ion-header {
+  ion-toolbar {
+    --background: #ffffff;
+  }
+
+  ion-title {
+    font-weight: 600;
+  }
+}
+
+ion-content {
+  --padding-top: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  ion-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+  }
+
+  ion-input,
+  ion-select,
+  ion-textarea {
+    --background: #ffffff;
+    --border-radius: 12px;
+    --border-color: #E5E7EB;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    font-size: 15px;
+  }
+
+  &.half {
+    flex: 1;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 8px;
+
+  ion-chip {
+    --background: #F3F4F6;
+    --color: #6B7280;
+    border-radius: 20px;
+    font-size: 14px;
+    height: 36px;
+
+    &[color="primary"] {
+      --background: #0066FF;
+      --color: #ffffff;
+    }
+  }
+}
+
+.form-actions {
+  margin-top: 32px;
+
+  ion-button {
+    --border-radius: 12px;
+    height: 52px;
+    font-weight: 600;
+    margin-bottom: 12px;
+
+    &[fill="outline"] {
+      --border-color: #E5E7EB;
+      --color: #6B7280;
+    }
+  }
+}
+
+.alternative-action {
+  margin-top: 24px;
+  padding: 20px;
+  background: #F9FAFB;
+  border-radius: 12px;
+  text-align: center;
+
+  p {
+    font-size: 13px;
+    color: #6B7280;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+  }
+
+  ion-button {
+    --color: #0066FF;
+    font-weight: 500;
+  }
+}
+

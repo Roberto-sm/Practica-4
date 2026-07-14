@@ -1,0 +1,147 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <span class="logo">
+        <ion-icon name="wallet" color="primary"></ion-icon>
+        Gasto Fácil
+      </span>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="page-title">
+    <h1>Mis gastos</h1>
+  </div>
+
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    placeholder="¿En qué gastaste hoy?"
+    [debounce]="300"
+    (ionInput)="buscar($event)">
+  </ion-searchbar>
+
+  <div class="filter-chips">
+
+    <ion-chip
+      [color]="filtroActivo() === 'todos' ? 'primary' : 'light'"
+      (click)="setFiltro('todos')">
+      Fechas
+    </ion-chip>
+
+    <ion-chip
+      [color]="filtroActivo() === 'todos' ? 'primary' : 'medium'"
+      (click)="setFiltro('todos')">
+      Todos
+    </ion-chip>
+
+    <ion-chip
+      [color]="filtroActivo() === 'comida' ? 'primary' : 'light'"
+      (click)="setFiltro('comida')">
+      Comida
+    </ion-chip>
+
+  </div>
+
+  <ion-list class="expenses-list">
+
+    @for (gasto of gastosFiltrados(); track gasto.id) {
+
+      <ion-item-sliding>
+
+        <ion-item lines="none" class="expense-item">
+
+          <div
+            class="category-icon"
+            [style.background-color]="getCategoriaColor(gasto.categoria) + '20'"
+            slot="start">
+
+            <ion-icon
+              [name]="getCategoriaIcon(gasto.categoria)"
+              [style.color]="getCategoriaColor(gasto.categoria)">
+            </ion-icon>
+
+          </div>
+
+          <ion-label>
+            <h3>{{ gasto.concepto }}</h3>
+
+            <p>
+              <ion-badge [style.background-color]="getCategoriaColor(gasto.categoria)">
+                {{ getCategoriaNombre(gasto.categoria) }}
+              </ion-badge>
+
+              <span class="date">
+                {{ gastosService.formatearFecha(gasto.fecha) }}
+              </span>
+            </p>
+          </ion-label>
+
+          <ion-note slot="end" class="expense-amount">
+            {{ gastosService.formatearMonto(gasto.monto) }}
+          </ion-note>
+
+        </ion-item>
+
+        <ion-item-options side="end">
+
+          <ion-item-option
+            color="primary"
+            (click)="editarGasto(gasto)">
+
+            <ion-icon
+              slot="icon-only"
+              name="create-outline">
+            </ion-icon>
+
+          </ion-item-option>
+
+          <ion-item-option
+            color="danger"
+            (click)="eliminarGasto(gasto.id)">
+
+            <ion-icon
+              slot="icon-only"
+              name="trash-outline">
+            </ion-icon>
+
+          </ion-item-option>
+
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    }
+
+  </ion-list>
+
+  @if (gastosFiltrados().length === 0) {
+
+    <div class="empty-state">
+      <ion-icon name="receipt-outline"></ion-icon>
+
+      <h3>No hay gastos</h3>
+
+      <p>¿No encuentras lo que buscas?</p>
+
+      <ion-button fill="outline" size="small">
+        Revisar otros meses
+      </ion-button>
+    </div>
+
+  }
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="irANuevoGasto()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

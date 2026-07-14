@@ -1,0 +1,144 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="header-content">
+      <div class="logo">
+        <ion-icon name="wallet"></ion-icon>
+        <span>Gasto Fácil</span>
+      </div>
+
+      <ion-button fill="clear">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="scanner-header">
+    <h2>Escanear ticket</h2>
+  </div>
+
+  <div class="camera-container">
+    <div class="camera-preview">
+
+      @if (mostrarCamara()) {
+
+        <video
+          #videoPreview
+          autoplay
+          playsinline
+          muted
+          class="webcam-video">
+        </video>
+
+        <ion-button
+          class="webcam-capture-btn"
+          (click)="capturarDesdeWebcam()">
+
+          CAPTURAR
+
+        </ion-button>
+
+      } @else if (imagenCapturada()) {
+
+        <img [src]="imagenCapturada()" alt="Ticket">
+
+      } @else {
+
+        <div class="camera-placeholder">
+          <ion-icon name="camera-outline"></ion-icon>
+        </div>
+
+      }
+
+      <div class="scan-frame">
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+      </div>
+
+    </div>
+  </div>
+
+  @if (imagenCapturada()) {
+
+    <div class="capture-info">
+      <div class="captured-file">
+        <ion-icon name="document-text-outline"></ion-icon>
+
+        <div class="file-details">
+          <span class="file-name">Captura reciente</span>
+          <span class="file-meta">Ticket_20260531.jpg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+
+      <ion-button
+        expand="block"
+        class="analyze-btn"
+        (click)="analizarConIA()">
+
+        <ion-icon slot="start" name="sparkles"></ion-icon>
+        ANALIZAR CON IA
+      </ion-button>
+
+      <p class="ai-description">
+        Nuestra IA detectará automáticamente montos, fechas y categorías
+      </p>
+
+      <ion-button
+        fill="clear"
+        class="retake-btn"
+        (click)="reiniciarYTomarFoto()">
+
+        <ion-icon slot="start" name="refresh-outline"></ion-icon>
+        TOMAR OTRA FOTO
+      </ion-button>
+
+    </div>
+
+  } @else if (!mostrarCamara()) {
+
+    <div class="action-buttons">
+
+      <ion-button
+        expand="block"
+        class="capture-btn"
+        (click)="tomarFoto()">
+
+        TOMAR FOTO
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        class="gallery-btn"
+        (click)="galleryInput.click()">
+
+        GALERÍA
+      </ion-button>
+
+    </div>
+
+  }
+
+  <input
+    #cameraInput
+    type="file"
+    accept="image/*"
+    capture="environment"
+    (change)="cargarDesdeNavegador($event)"
+    hidden>
+
+  <input
+    #galleryInput
+    type="file"
+    accept="image/*"
+    (change)="cargarDesdeNavegador($event)"
+    hidden>
+
+</ion-content>
