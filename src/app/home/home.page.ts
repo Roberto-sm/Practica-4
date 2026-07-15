@@ -125,38 +125,54 @@ export class HomePage {
     }
   }
 
-  detectarAnomaliasDeGasto(): void {
+ async detectarAnomaliasDeGasto() {
     const gastos = this.gastosMesSeleccionado();
-    const LIMITE_PROMEDIO = 500; 
+    const LIMITE_PROMEDIO = 500;
 
-    const totalesPorCategoria = gastos.reduce((acc, g) => {
+    const totalesPorCategoria = gastos.reduce((acc: Record<string, number>, g: any) => {
       acc[g.categoria] = (acc[g.categoria] || 0) + g.monto;
       return acc;
     }, {} as Record<string, number>);
 
     const categoriaAlerta = Object.keys(totalesPorCategoria).find(
-      cat => totalesPorCategoria[cat] > LIMITE_PROMEDIO && (cat === 'alimentacion' || cat === 'entretenimiento')
+      cat => totalesPorCategoria[cat] > LIMITE_PROMEDIO && (cat === 'comida' || cat === 'entretenimiento')
     );
 
     if (categoriaAlerta) {
-      // Calculamos cuánto dinero se pasó del presupuesto asignado
       const exceso = totalesPorCategoria[categoriaAlerta] - LIMITE_PROMEDIO;
       this.montoARecortar.set(exceso);
 
       const consejosFormulados = [
         "⚠️ Detecté un pico de antojos en esta categoría. Darse gustos es genial, pero que no devoren tu meta del mes.",
-        "💡 Tus gastos aquí superaron los $500. El 'efecto hormiga' por puros gustos frena tu libertad financiera. ¡Ojo ahí!",
+        "💡 El 'efecto hormiga' por puros gustos frena tu libertad financiera. ¡Ojo ahí!",
         "🔥 Alerta de salud financiera: Estás gastando más de tu promedio por mero placer. Ajusta el freno antes de que acabe el mes.",
         "📊 Tu IA detectó anomalías: Disfrutar está bien, pero el interés compuesto de tus ahorros rinde más que ese gasto momentáneo."
       ];
 
       const indiceAleatorio = Math.floor(Math.random() * consejosFormulados.length);
-      this.consejoIA.set(consejosFormulados[indiceAleatorio]);
+      const consejoElegido = consejosFormulados[indiceAleatorio];
+      
+      this.consejoIA.set(consejoElegido);
+
+      // 💡 NUEVO: Llamar al Proxy de Supabase para enviar WhatsApp
+      try {
+        const mensajeCompleto = `¡Hola! Tu Asistente Financiero detectó un sobregiro en *${categoriaAlerta}* por $${exceso} MXN.\n\n${consejoElegido}`;
+        
+        await this.supabaseService.client.functions.invoke('enviar-alerta-proxy', {
+          body: { mensaje: mensajeCompleto } // Angular manda el texto ya procesado
+        });
+        console.log("Alerta enviada al proxy exitosamente.");
+      } catch (error) {
+        console.error("Error al notificar al proxy:", error);
+      }
+
     } else {
-      this.consejoIA.set(null); 
+      this.consejoIA.set(null);
+      this.montoARecortar.set(0);
       this.mostrarPlanAlivio.set(false);
     }
   }
+
 
   togglePlanAlivio(): void {
     this.mostrarPlanAlivio.update(v => !v);
